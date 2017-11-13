@@ -1,0 +1,110 @@
+@import '~normalize.css';
+
+*{
+    font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;    
+}
+a{
+    text-decoration: none;
+}
+li,ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+a,body,button,html{
+    color: #666;
+}
+.el-header, .el-footer {
+    padding: 0;
+    background-color: #f1f1f1;
+    color:rgb(33, 37, 43);;
+    text-align: center;
+    line-height: 55px;
+}
+.navbar {
+    font-family: "Avenir Next",Avenir,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    position: relative;
+    min-height: 50px;
+    border: 1px solid transparent;
+    .clear {
+        clear: none;
+    }
+}
+.navbar-color-fixed {
+    top: 0;
+}
+.navbar-nav {
+    float: left;
+    margin: 0;
+}
+.nav {
+    margin-bottom: 0;
+    padding-left: 0;
+    list-style: none;
+}
+.navbar-nav>li {
+    float: left;
+}
+.navbar-nav>.active>a, .navbar-nav>.active>a:focus,.navbar-nav>li>a:hover {
+    color: #399faa;
+}
+.nav>li {
+    position: relative;
+    display: block;
+}
+.navbar-nav>li>a {
+    color: #72736f; 
+    padding: 15px 10px;
+    line-height: 20px;
+    position: relative;
+    display: block;
+}
+
+.navbar:after, .navbar:before {
+    content: " ";
+    display: table;
+}
+.logo.navbar-brand {
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+}
+.logo {
+  //  background: url(/f35d49d…/eb35e/images/logo.svg) no-repeat center;
+    background-size: auto 35px;
+    width: 120px;
+    height: 50px;
+}
+.navbar-brand {
+    float: left;
+    padding: 15px 15px;
+    font-size: 18px;
+    line-height: 20px;
+    height: 50px;
+}
+.pass{
+    background: linear-gradient(to right,#39aa56 0,#39aa56 10px,#fff 10px,#fff 100%) no-repeat;    
+}
+.passed{
+    color: #39aa56;
+}
+.actived{
+    color: #3eaaaf
+}
+/**
+color theme
+**/
+.el-tabs__item:hover {
+    color: #3eaaaf !important;
+    cursor: pointer;
+ }
+ .el-tabs__item.is-active {
+    color: #3eaaaf !important;
+ }
+ .el-tabs__active-bar{
+    background-color: #3eaaaf !important;   
+ }

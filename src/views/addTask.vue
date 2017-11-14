@@ -22,45 +22,17 @@
                     <el-form-item label="任务名称">
                         <el-input v-model="form.name"></el-input>
                     </el-form-item>
-                    <el-form-item label="任务性质">
-                        <el-checkbox-group v-model="form.type">
-                        <el-checkbox label="美食/餐厅线上任务" name="type"></el-checkbox>
-                        <el-checkbox label="地推任务" name="type"></el-checkbox>
-                        <el-checkbox label="线下主题任务" name="type"></el-checkbox>
-                        <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
-                        </el-checkbox-group>
+                    <el-form-item label="选择算法">
+                        <el-select v-model="algorithmName" placeholder="请选择使用的算法">
+                            <el-option v-for="(item,index) in settings" :key="index" :label="item.label" :value="item.name"></el-option>
+                        </el-select>
                     </el-form-item>
-                   
                     <el-form-item>
                         <el-button type="primary" @click="stepOnCheckOne">下一步</el-button>
                     </el-form-item>
                </el-form>
                <el-form v-show="activeStep==2" :model="argForm" label-width="80px">
-                    <el-form-item label="任务区域">
-                        <el-select v-model="argForm.region" placeholder="请选择任务区域">
-                        <el-option label="区域一" value="shanghai"></el-option>
-                        <el-option label="区域二" value="beijing"></el-option>
-                        </el-select>
-                    </el-form-item>
-                    <el-form-item label="任务时间">
-                        <el-col :span="11">
-                        <el-date-picker type="date" placeholder="选择日期" v-model="argForm.date1" style="width: 100%;"></el-date-picker>
-                        </el-col>
-                        <el-col class="line" :span="2">-</el-col>
-                        <el-col :span="11">
-                        <el-time-picker type="fixed-time" placeholder="选择时间" v-model="argForm.date2" style="width: 100%;"></el-time-picker>
-                        </el-col>
-                    </el-form-item>
-                    <el-form-item label="即时配送">
-                        <el-switch v-model="argForm.delivery"></el-switch>
-                    </el-form-item>
-                    
-                    <el-form-item label="特殊资源">
-                        <el-radio-group v-model="argForm.resource">
-                        <el-radio label="线上品牌商赞助"></el-radio>
-                        <el-radio label="线下场地免费"></el-radio>
-                        </el-radio-group>
-                    </el-form-item>
+                    <configForm v-for="(item,index) in argFormSettings" :key="index" :label="item.label" :valueName="item.name"></configForm>
                     <el-form-item>
                         <el-button type="primary" @click="stepOnCheckTwo">添加任务(接口测试)</el-button>
                     </el-form-item>
@@ -71,9 +43,16 @@
 </div>
 </template>
 <script> 
+import configForm from '../components/configForm.vue'
+import config from '../config.js'
 export default {
+    components:{
+        configForm,
+    },
     data() {
       return {
+        settings:config.settings,
+        algorithmName: '',
         activeStep: 1,
         form: {
           name: '',
@@ -86,20 +65,19 @@ export default {
           desc: ''
         },
         argForm: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
+  
         }
       }
+    },
+    computed:{
+        argFormSettings(){
+            return config[this.algorithmName] || null
+        }
     },
     methods: {
       stepOnCheckOne() {
         this.activeStep = 2;
+        // 对argForm添加响应式属性
       },
       stepOnCheckTwo() {
         this.activeStep = 2;

@@ -1,7 +1,13 @@
 <template>
   <div>
-        <el-form-item :label="label">
-            <el-input v-if="type==='input'" v-model="value" placeholder="请输入内容"></el-input>
+        <div class="form-item">
+            <label class="form-item-label" style="width:20%">
+                {{ label }}
+            </label>
+            <el-input v-if="type==='input'" :value="value" 
+                        style="width:30%;margin-top:4px" size="small"
+                        @change="onchange">
+            </el-input>
             <el-select v-if="type==='select'" v-model="value" placeholder="请选择">
                 <el-option
                     v-for="item in selectedOptions"
@@ -10,7 +16,8 @@
                     :value="item.value">
                 </el-option>
             </el-select>
-        </el-form-item>
+            <div class="form-item-remark">here is some remark</div>
+        </div>
   </div>
 </template>
 <script>
@@ -23,6 +30,10 @@ export default {
       valueName:{
           type: String,
       },
+      value:{
+          type: String,
+          default: ''
+      },
       label:{
           type: String,
           default: '新增字段'
@@ -31,10 +42,10 @@ export default {
           type: Array,
       }
   },
-  data(){
-      return {
-        
-        value: ''
+  methods:{
+      onchange(value){
+          console.log(value)
+          this.$emit('onchange:'+ valueName, value)
       }
   },
   created(){
@@ -60,3 +71,34 @@ export default {
 
 }
 </script>
+<style lang="less">
+.form-item{
+    margin: 5px 0px;
+}
+.form-item::before {
+    display: table;
+    content: "";
+}
+.form-item::after {
+    clear: both;
+}
+.form-item::after, .form-item::before {
+    display: table;
+    content: "";
+}
+.form-item-label{
+     text-align: right;
+    vertical-align: middle;
+    float: left;
+    font-size: 14px;
+    color: #5a5e66;
+    line-height: 40px;
+    padding: 0 12px 0 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.form-item-remark{
+    position: relative;
+    display: inline-block;
+}
+</style>

@@ -31,14 +31,15 @@ module.exports = {
         },
         {
             label: '1标签比例',
-            name: 'Label1',
+            name: 'label1',
             type: 'input',
             options: {},
             validator: {},// (0~1之间)
         },
+
         {
             label: '特征调整算法',
-            name: 'ImprotenceAdjustNum',
+            name: 'improtenceAdjustNum',
             type: 'input',
             options: {},
             validator: {},// (0~1之间)	public static final int AUC_NUM = 1;public static final int SVM_NUM = 2;
@@ -61,7 +62,7 @@ module.exports = {
          */
         {
             label: '父母染色体选择算法',
-            name: 'ParentChrosChooseNum',
+            name: 'parentChrosChooseNum',
             type: 'input',
             options: {},
             validator: {},// (0~1之间)	public static final int AUC_NUM = 1;public static final int SVM_NUM = 2;

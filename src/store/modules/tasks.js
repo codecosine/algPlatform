@@ -56,7 +56,7 @@ const actions = {
     return task.addTask(data);
   },
   checkConfig ({ commit, state }, data){
-    task.checkConfig(data);
+    return task.checkConfig(data);
   },
 }
 
@@ -67,16 +67,6 @@ const mutations = {
     if(task){
       state.list.push(task)
     }
-    //state.checkoutStatus = null
-    //const record = state.added.find(p => p.id === id)
-    // if (!record) {
-    //   state.added.push({
-    //     id,
-    //     quantity: 1
-    //   })
-    // } else {
-    //   record.quantity++
-    // }
   },
 
   [types.CHECKOUT_REQUEST] (state) {

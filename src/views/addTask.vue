@@ -121,8 +121,7 @@ export default {
       },
       uploadSuccess(response, file, fileList){
           this.showUploadSuccess = true;
-          console.log(response);
-          //this.formtaskId = response.data.id  
+          this.form.taskId = response.data.taskId  
       },
       back(){
           if(this.activeStep){
@@ -150,18 +149,29 @@ export default {
         this.activeStep = 2;
       },
       stepOnCheckTwo() {
-        this.$store.dispatch('checkConfig',this.argForm).then(data=>{
+        this.$store.dispatch('checkConfig',{
+                parameter:this.argForm,
+                taskId:this.form.taskId,
+            }).then(res=>{
+            console.log(res)
             this.$message({
-                message: data.message,
+                message: res.data.message,
                 type: 'success'
             });
             this.activeStep = 3;
         }).catch(error=>{
-            this.$message.error(error.message);
+            this.$message.error(error.data.message);
         })
       },
       submitTask(){
-        this.$store.dispatch('addTask')
+        this.$store.dispatch('addTask',form).then(res=>{
+            this.$message({
+                message: res.data.message,
+                type: 'success'
+            });
+        }).catch(error=>{
+            this.$message.error(error.data.message);
+        })
       }
     }  
 }

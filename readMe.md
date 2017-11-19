@@ -81,6 +81,7 @@ runParameter对应的json结构如下
 {
     "trainMiss": 0.1, //训练集缺失比例(0,1)
     "test": 0.5, //测试集比例(0,1)
+
     "subSpaceEvidenceSynthesisNum": 1, //多推理结果合成方法,1:平均法多推理结果合成;2:投票法多推理结果合成
     "evaluationExecutorNum": 2, //单多线程,1:单线程;2:多线程
     "featureSeparationNum": 1, //特征分离算法,1:平均数特征分割;2:中位数特征分割;3:用户指定值特征分割
@@ -102,7 +103,7 @@ runParameter对应的json结构如下
     "improtenceAdjustNum": 1, //特征调整算法,1:平方调整算法;2:减法调整算法
     "evaluationNum": 1, //评价算法,1:auc;2:svm
     "parentChrosChooseNum": 2, //父母染色体选择算法,1:顺序法父母染色体选择;2:轮盘法父母染色体选择
-    "fnMins": [ 1,3, 6, 13, 15], //sn子空间个数最小值，长度需要个sns一样
+    "fnMins": [1 ,3, 6, 13, 15], //sn子空间个数最小值，长度需要个sns一样
     "sns": [
         [1],
         [1,2],

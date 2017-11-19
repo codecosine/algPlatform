@@ -56,6 +56,9 @@ const actions = {
   addTask ({ commit, state }, data){
     task.addTask(data);
   },
+  checkConfig ({ commit, state }, data){
+    task.checkConfig(data);
+  },
   checkout ({ commit, state }, products) {
     const savedCartItems = [...state.added]
     commit(types.CHECKOUT_REQUEST)

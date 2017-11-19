@@ -1,4 +1,3 @@
-import shop from '../../api/shop'
 import task from '../../api/task'
 import * as types from '../mutation-types'
 
@@ -54,20 +53,11 @@ const getters = {
 // actions
 const actions = {
   addTask ({ commit, state }, data){
-    task.addTask(data);
+    return task.addTask(data);
   },
   checkConfig ({ commit, state }, data){
     task.checkConfig(data);
   },
-  checkout ({ commit, state }, products) {
-    const savedCartItems = [...state.added]
-    commit(types.CHECKOUT_REQUEST)
-    shop.buyProducts(
-      products,
-      () => commit(types.CHECKOUT_SUCCESS),
-      () => commit(types.CHECKOUT_FAILURE, { savedCartItems })
-    )
-  }
 }
 
 // mutations

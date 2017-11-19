@@ -5,7 +5,7 @@
             <div class="content">
                <el-steps :active="activeStep" finish-status="success" simple style="margin-top: 20px">
                     <el-step title="输入数据集及任务信息" ></el-step>
-                    <el-step title="输入任务算法参数"></el-step>
+                    <el-step title="输入算法参数"></el-step>
                     <el-step title="添加到任务队列" ></el-step>
                </el-steps>
                <div class="form-content">
@@ -66,15 +66,15 @@
                    </div>
                     <el-form-item>
                         <el-button @click="back">上一步</el-button>
-                        <el-button type="primary" @click="stepOnCheckTwo">校验参数</el-button>
-                        <!-- <el-button type="primary" @click="stepOnCheckTwo">校验参数</el-button> -->
+                        <el-button type="primary" @click="stepOnCheckTwo">校验参数并下一步</el-button>
                     </el-form-item>
                </el-form>
                <el-form v-if="activeStep==3" :model="form" label-width="150px" size="small">
+                    <h3>确认信息</h3>
+                    <div>最终任务信息</div>
                     <el-form-item>
                         <el-button @click="back">上一步</el-button>
-                        <el-button type="primary" @click="submitTask" disabled>添加任务</el-button>
-                        <el-button type="primary" @click="stepOnCheckTwo">添加任务(接口测试)</el-button>
+                        <el-button type="primary" @click="submitTask" disabled>添加到任务队列</el-button>
                     </el-form-item>
                </el-form>
                </div>
@@ -100,6 +100,7 @@ export default {
         form: {
           taskId: '1',
           name: '',
+          times: 1,
           algorithmName: '',
         },
         argForm: {}
@@ -129,11 +130,15 @@ export default {
           }
       },
       stepOnCheckOne() {
-        if(!this.form.algorithmName || !this.form.taskId){
-            this.$message.error('请上传数据和选择算法');
+        if(!this.form.algorithmName){
+            this.$message.error('请选择算法');
             return
         }
-        this.activeStep = 2;
+        if(!this.form.taskId){
+            this.$message.error('请上传正确的数据集');
+            return
+        }
+        // 对argForm添加响应式属性
         if(this.argFormSettings){
             this.argFormSettings.forEach(ele=>{
                 this.$set(this.argForm,ele.name,{});
@@ -142,11 +147,18 @@ export default {
                 })
             })
         }
-        // 对argForm添加响应式属性
+        this.activeStep = 2;
       },
       stepOnCheckTwo() {
-        this.activeStep = 3;
-        this.$store.dispatch('checkConfig',this.argForm)
+        this.$store.dispatch('checkConfig',this.argForm).then(data=>{
+            this.$message({
+                message: data.message,
+                type: 'success'
+            });
+            this.activeStep = 3;
+        }).catch(error=>{
+            this.$message.error(error.message);
+        })
       },
       submitTask(){
         this.$store.dispatch('addTask')

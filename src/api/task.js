@@ -1,23 +1,15 @@
 import axios from 'axios'
 function addTask(options){
-  return axios.post('/addTask', options)
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+  return axios.post('/solutionRun', options)
+}
+function solutionRun(options){
+  return axios.post('/solutionRun', options)
 }
 function checkConfig(options){
   return axios.post('/checkConfig', options)
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
 }
 export default {
     addTask,
     checkConfig,
+    solutionRun,
 }

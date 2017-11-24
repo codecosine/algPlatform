@@ -74,7 +74,7 @@
                     <div>最终任务信息</div>
                     <el-form-item>
                         <el-button @click="back">上一步</el-button>
-                        <el-button type="primary" @click="submitTask" disabled>添加到任务队列</el-button>
+                        <el-button type="primary" @click="submitTask">添加到任务队列</el-button>
                     </el-form-item>
                </el-form>
                </div>
@@ -87,6 +87,7 @@
 <script> 
 import configForm from '../components/configForm.vue'
 import config from '../config.js'
+import task from '../api/task'
 export default {
     components:{
         configForm,
@@ -149,28 +150,22 @@ export default {
         this.activeStep = 2;
       },
       stepOnCheckTwo() {
-        this.$store.dispatch('checkConfig',{
-                parameter:this.argForm,
-                taskId:this.form.taskId,
-            }).then(res=>{
+        //taskId:this.form.taskId,
+        task.checkConfig(this.argForm).then(res=>{
             console.log(res)
             this.$message({
                 message: res.data.message,
                 type: 'success'
             });
             this.activeStep = 3;
-        }).catch(error=>{
-            this.$message.error(error.data.message);
+        }).catch(err=>{
+            console.error(err)
         })
       },
       submitTask(){
-        this.$store.dispatch('addTask',form).then(res=>{
-            this.$message({
-                message: res.data.message,
-                type: 'success'
-            });
-        }).catch(error=>{
-            this.$message.error(error.data.message);
+        task.solutionRun(this.form).then(res=>{
+            console.log('solutionRun')
+            console.log(res)
         })
       }
     }  

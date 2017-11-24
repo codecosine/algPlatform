@@ -52,9 +52,9 @@ const getters = {
 
 // actions
 const actions = {
-  addTask ({ commit, state }, data){
-    return task.addTask(data);
-  },
+  // addTask ({ commit, state }, data){
+  //   return task.addTask(data);
+  // },
   checkConfig ({ commit, state }, data){
     return task.checkConfig(data);
   },

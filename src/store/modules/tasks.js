@@ -6,18 +6,7 @@ import * as types from '../mutation-types'
 const state = {
   // view
   currentIndex: 0,
-  list: [{
-    id: 18825,
-    algs: 'ID3',
-    status: 1,
-    name: 'task1983',
-    user: 'administrator',
-    message: '任务执行完成',
-    result: {},
-    submitTime: '2017-11-10 16:26:35',
-    startTime: '2017-11-10 16:26:35',
-    finishTime: '2017-11-10 16:26:35',
-  }],
+  list: [],
   checkoutStatus: null,
   // cathe
   cathe: [],

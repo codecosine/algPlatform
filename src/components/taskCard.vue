@@ -18,8 +18,8 @@
                   <h3>计算结果<el-tag style="margin-left:10px" size="mini">下载</el-tag><el-tag type="success"style="margin-left:10px"  size="mini">在线</el-tag></h3>
                   <div>
                     <ul class="box-info-list">
-                      <li><span><i class="el-icon-time"></i>启动时间:</span>2017-11-9 23:46:53</li>
-                      <li><span><i class="el-icon-time"></i>完成时间:</span>2017-11-9 23:46:53</li>
+                      <li><span><i class="el-icon-time"></i>启动时间:</span>{{ task.startTime || ''}}</li>
+                      <li><span><i class="el-icon-time"></i>完成时间:</span>{{ task.finishTime || ''}}</li>
                     </ul>
                   </div>
                 </div>

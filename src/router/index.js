@@ -9,7 +9,7 @@ export default new Router({
   mode: 'history',  
   routes: [
     {
-      path: '/welcome',
+      path: '/',
       name: 'welcome',
       component: DashBoard
     },

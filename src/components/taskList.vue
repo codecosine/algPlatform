@@ -12,7 +12,7 @@
     <div class="sidebar-list">
         <div class="ember-view">
             <ul class="task-list">
-                <li class="task" v-for="(item,index) in tasklist" :key="index">
+                <li class="task" @click="changeIndex(index)" v-for="(item,index) in tasklist" :key="index">
                     <div class="task-card pass">
                         <h2>
                             <a :href="'/'+item.name">
@@ -42,7 +42,11 @@ export default {
               return ele.name.includes(this.searchinput) || (ele.id + "").includes(this.searchinput)
           });
       },
-
+  },
+  methods:{
+      changeIndex(index){
+          this.$store.dispatch('changeIndex',index)
+      }
   }
 }
 </script>
@@ -66,6 +70,7 @@ i{
     
     .task-list{
         .task{
+            cursor: pointer;
             .task-card{
                 height: 100px;
                 padding: 5px 0px 10px 25px;

@@ -23,17 +23,9 @@ export default {
   data(){
     return {
       routesList:[{
-        path:'/welcome',
-        name:'cosine'
-      },{
         path:'/dashboard',
         name:'任务队列'
-      }
-      // ,{
-      //   path:'/algorithms',
-      //   name:'算法配置'
-      // }
-      ,{
+      },{
         path:'/addTask',
         name:'添加任务'
       }]

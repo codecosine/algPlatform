@@ -45,7 +45,7 @@
                         <el-input v-model="form.name" placeholder="task1" style="width:40%"></el-input>
                     </el-form-item>
                     <el-form-item label="执行次数">
-                        <el-input-number v-model="form.times" @change="handleChange" 
+                        <el-input-number v-model="form.times"
                             :min="1" :max="10" label="描述文字"></el-input-number>
                     </el-form-item>
                     <el-form-item>
@@ -70,8 +70,18 @@
                     </el-form-item>
                </el-form>
                <el-form v-if="activeStep==3" :model="form" label-width="150px" size="small">
-                    <h3>确认信息</h3>
-                    <div>最终任务信息</div>
+                    <h3>确认任务信息</h3>
+                    <div class="confirmBox">
+                        <p>任务id:{{form.taskId}}</p>
+                        <p>算法:{{form.algorithmName}}</p>
+                        <p>名称:{{form.name}}</p>
+                        <p>执行次数:{{form.times}}</p>
+                        <p>参数：
+                            <el-tooltip :content="stringifyArg" placement="top">
+                                <el-button size="small">详情</el-button>
+                            </el-tooltip>
+                        </p>
+                    </div>
                     <el-form-item>
                         <el-button @click="back">上一步</el-button>
                         <el-button type="primary" @click="submitTask">添加到任务队列</el-button>
@@ -110,6 +120,9 @@ export default {
     computed:{
         argFormSettings(){
             return config[this.form.algorithmName] || null
+        },
+        stringifyArg(){
+            return JSON.stringify(this.argForm)
         }
     },
     methods: {
@@ -121,8 +134,12 @@ export default {
           this.showUploadError = true;
       },
       uploadSuccess(response, file, fileList){
-          this.showUploadSuccess = true;
-          this.form.taskId = response.data.taskId  
+          if(response.code == 0){
+            this.showUploadSuccess = true;
+            this.form.taskId = response.data.taskId  
+          } else {
+            this.showUploadError = true;
+          }
       },
       back(){
           if(this.activeStep){
@@ -151,7 +168,13 @@ export default {
       },
       stepOnCheckTwo() {
         //taskId:this.form.taskId,
-        task.checkConfig(this.argForm).then(res=>{
+        if(!this.form.taskId){
+            return null;
+        }
+        task.checkConfig({ 
+            parameter:this.argForm,
+            taskId:this.form.taskId
+        }).then(res=>{
             console.log(res)
             this.$message({
                 message: res.data.message,
@@ -172,6 +195,13 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+.confirmBox{
+    border: #666 dashed 1px;
+    margin: 15px 0px;
+    p{
+        padding-left: 10px;
+    }
+}
 .content{
     max-width: 1024px;
     margin-left: auto;

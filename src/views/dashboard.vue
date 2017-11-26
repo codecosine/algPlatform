@@ -6,8 +6,7 @@
         </el-aside>
         <el-main>
             <div class="content">
-                <h1>task18825/administrator</h1>
-                <taskCard></taskCard>
+                <taskCard :task="cuurentTask"></taskCard>
             </div>
         </el-main>
     </el-container>
@@ -20,6 +19,23 @@ export default {
     components: {
         taskList,
         taskCard,
+    },
+    computed:{
+      cuurentTask(){
+        return this.$store.getters.cuurentTask
+      }
+    },
+    created () {
+        this.fetchData()
+    },
+    watch: {
+        // 如果路由有变化，会再次执行该方法
+        '$route': 'fetchData'
+    },
+    methods:{
+        fetchData(){
+            this.$store.dispatch('updateTaskList')
+        }
     }
 }
 </script>

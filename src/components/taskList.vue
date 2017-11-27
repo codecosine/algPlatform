@@ -21,7 +21,7 @@
                             <span class="tag">#{{(item.taskId+"").substring(0,5)}}</span>
                         </h2>
                         <p><i class="el-icon-document"></i>{{ item.algs }}</p>
-                        <p><i class="el-icon-time"></i>{{ item.finishTime }}</p>
+                        <p><i class="el-icon-time"></i>{{ item.startTime }}</p>
                     </div>
                 </li>
             </ul>  

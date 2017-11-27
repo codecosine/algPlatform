@@ -15,7 +15,14 @@
                   </div>
                 </div>
                 <div class="box-result">
-                  <h3>计算结果<el-tag style="margin-left:10px" size="mini">下载</el-tag><el-tag type="success"style="margin-left:10px" @click="dialogTableVisible= true" size="mini">在线</el-tag></h3>
+                  <h3>计算结果
+                    <div style="display:inline-block; cursor: pointer;margin-left:10px">
+                    <el-tag size="mini">下载</el-tag>
+                    </div>
+                    <div @click="dialogTableVisible= true" style="display:inline-block; cursor: pointer;margin-left:10px">
+                      <el-tag type="success"  size="mini">在线查看</el-tag>
+                    </div>
+                  </h3>
                   <div>
                     <ul class="box-info-list">
                       <li><span><i class="el-icon-time"></i>启动时间:</span>{{ task.startTime || ''}}</li>
@@ -33,11 +40,12 @@
       
         </el-tab-pane>
         <el-tab-pane label="参数" name="second">
-           <div v-for="(args,index) in argForm" :key="index">
-                <li v-for="(argKeys,index) in Object.keys(args)" :key="index">
-                    <span>{{argKeys}}</span>:=>> {{args[argKeys]}}
-                </li>
+          <div v-if="argForm">
+           <div v-for="(argsKeys,index) in Object.keys(argForm)" :key="index">
+                    <span>{{argsKeys}}</span>:=> {{argForm[argsKeys]}}
             </div>
+          </div>
+          <div v-if="!argForm">暂无</div>
         </el-tab-pane>
         <el-tab-pane label="备注" name="third">
         </el-tab-pane>
@@ -64,10 +72,13 @@
     },
     computed:{
       argForm(){
-        return this.task.parameter || null
+        return this.task.parameter || {}
       },
       gridData(){
-        return this.task.result.datas || []
+        if(this.task.result){
+          return this.task.result.datas
+        }
+        return []
       }
     },
     methods: {

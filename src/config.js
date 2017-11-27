@@ -26,7 +26,7 @@ var local1 = [
     },
     {
         label: '多推理结果合成方法',
-        name: 'SubSpaceEvidenceSynthesisNum',
+        name: 'subSpaceEvidenceSynthesisNum',
         type: 'radio',
         options: [{
             label:'平均法多推理结果合成',
@@ -82,9 +82,6 @@ var local1 = [
         }],
         remark: '子空间,1:完全随机子空间;2:sn随机子空间;3:sn特征选择子空间'
     },
-    
-    
-    //
     {
         label: '特征选择停止',
         name: 'stop',
@@ -132,7 +129,7 @@ var local1 = [
     },
     {
         label: 'Sns',
-        name: 'Sns',
+        name: 'sns',
         type: 'input',
         remark: 'sn子空间个数'
     },
@@ -150,60 +147,61 @@ var hereditaryParameter = [
     * hereditaryParameter
     */
    {
-       label: 'sameNum',
+       label: '最大解次数',
        name: 'sameNum',
        type: 'input',
        remark: '最多相同最大解次数(0,+00)'
    },
    {
-       label: 'chrosNum',
+       label: '染色体数',
        name: 'chrosNum',
        type: 'input',
        remark: '染色体数(0,+00)'
    },
    {
-       label: 'geneMutNumPro',
+       label: '基因突变比例',
        name: 'geneMutNumPro',
        type: 'input',
        type: 'slider',
        remark: '基因突变比例(0,1)'
    },
    {
-       label: 'geneMutPro',
+       label: '基因突变概率',
        name: 'geneMutPro',
        type: 'slider',
        remark: '基因突变概率(0,1)'
    },
    {
-       label: 'sameDeviation',
+       label: '相同解范围',
        name: 'sameDeviation',
        type: 'slider',
        remark: '相同解范围(0,1)'
    },
    {
-       label: 'step',
+       label: '基因步长',
        name: 'step',
        type: 'slider',
        remark: '基因步长(0,1)'
    },
    {
-       label: 'iterNum',
+       label: '迭代次数',
        name: 'iterNum',
        type: 'input',
        remark: '迭代次数(0,+00)'
    },
    {
-       label: 'saveChroPro',
+       label: '保留染色体比例',
        name: 'saveChroPro',
        type: 'slider',
        remark: '保留染色体比例(0,1)'
    },
    {
-       label: 'geneExPro',
+       label: '基因交换比例',
        name: 'geneExPro',
        type: 'slider',
        remark: '基因交换比例(0,1)'
    }]
+
 export default {
     /**
      * 算法参数输入配置

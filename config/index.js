@@ -44,6 +44,10 @@ module.exports = {
         target: 'http://127.0.0.1:2248',
         changeOrigin: true,
       },
+      '/getTaskList': {
+        target: 'http://127.0.0.1:2248',
+        changeOrigin: true,
+      },
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README

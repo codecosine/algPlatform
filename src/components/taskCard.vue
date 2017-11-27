@@ -9,7 +9,7 @@
                   <h2 class="passed">{{ task.message }}</h2>
                   <div>
                     <ul class="box-info-list">
-                      <li><span><i class="el-icon-document"></i>id:</span>{{ task.id }}</li>
+                      <li><span><i class="el-icon-document"></i>id:</span>{{ task.taskId }}</li>
                       <li><span><i class="el-icon-document"></i>算法:</span>{{ task.algs }}</li>
                     </ul>
                   </div>

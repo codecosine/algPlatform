@@ -18,7 +18,7 @@
                             <a :href="'/'+item.name">
                                 <span>{{ item.name }}</span>
                             </a>
-                            <span class="tag">#{{item.id}}</span>
+                            <span class="tag">#{{(item.taskId+"").substring(0,5)}}</span>
                         </h2>
                         <p><i class="el-icon-document"></i>{{ item.algs }}</p>
                         <p><i class="el-icon-time"></i>{{ item.finishTime }}</p>
@@ -39,7 +39,7 @@ export default {
   computed:{
       tasklist(){
           return this.$store.getters.taskList.filter(ele=>{
-              return ele.name.includes(this.searchinput) || (ele.id + "").includes(this.searchinput)
+              return ele.name.includes(this.searchinput) || (ele.taskId + "").includes(this.searchinput)
           });
       },
   },

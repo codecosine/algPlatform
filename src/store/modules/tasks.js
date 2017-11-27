@@ -16,7 +16,6 @@ const state = {
 const getters = {
   taskList: state => state.list,
   cuurentIndex: state => state.currentIndex,
-  //&& state.cuurentIndex+1 <= state.list.length
   cuurentTask: state=>{
     if(state.currentIndex != -1){
       return state.list[state.currentIndex]
@@ -48,7 +47,8 @@ const actions = {
   },
   updateTaskList({commit,state}){
     task.getList().then(res=>{
-      types.ADD_TO_LIST(res.data)
+      console.log(res.data)
+      commit(types.ADD_TO_LIST,res.data.data)
     });
   }
 }

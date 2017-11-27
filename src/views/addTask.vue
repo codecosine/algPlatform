@@ -53,6 +53,10 @@
                     </el-form-item>
                </el-form>
                <el-form v-if="activeStep==2" label-width="150px" size="small">
+                   <el-alert
+                        :title="info"
+                        type="info">
+                    </el-alert>
                    <div v-for="(item,index) in argFormSettings" :key="index" >
                     <h3>{{item.label}}</h3>
                     <configForm v-for="(element,index) in item.value" 
@@ -77,9 +81,7 @@
                         <p>名称:{{form.name}}</p>
                         <p>执行次数:{{form.times}}</p>
                         <p>参数：
-                            <el-tooltip :content="stringifyArg" placement="top">
                                 <el-button size="small">详情</el-button>
-                            </el-tooltip>
                         </p>
                     </div>
                     <el-form-item>
@@ -108,22 +110,22 @@ export default {
         showUploadSuccess: false,
         settings:config.settings,
         activeStep: 1,
+        info:{},
         form: {
           taskId: '1',
           name: '',
           times: 1,
           algorithmName: '',
         },
-        argForm: {}
+        argForm: {
+        }
       }
     },
     computed:{
         argFormSettings(){
             return config[this.form.algorithmName] || null
         },
-        stringifyArg(){
-            return JSON.stringify(this.argForm)
-        }
+
     },
     methods: {
       beforeUpload(){
@@ -136,7 +138,8 @@ export default {
       uploadSuccess(response, file, fileList){
           if(response.code == 0){
             this.showUploadSuccess = true;
-            this.form.taskId = response.data.taskId  
+            this.form.taskId = response.data.taskId;
+            this.info = response.data.info;
           } else {
             this.showUploadError = true;
           }
@@ -171,8 +174,13 @@ export default {
         if(!this.form.taskId){
             return null;
         }
+        // TEMP todo 
+        let formatPar = JSON.parse(JSON.stringify(this.argForm.local));
+        formatPar.hereditaryParameter = JSON.parse(JSON.stringify(this.argForm.hereditaryParameter));
+        //console.log(formatPar)
+        console.log(JSON.stringify(formatPar))
         task.checkConfig({ 
-            parameter:this.argForm,
+            parameter:formatPar,
             taskId:this.form.taskId
         }).then(res=>{
             console.log(res)
@@ -189,6 +197,13 @@ export default {
         task.solutionRun(this.form).then(res=>{
             console.log('solutionRun')
             console.log(res)
+            if(res.data.code == 0){
+                this.$message({
+                    message: res.data.message,
+                    type: 'success'
+                });
+                this.$router.push('/dashboard')
+            }
         })
       }
     }  

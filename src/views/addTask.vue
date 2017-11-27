@@ -81,7 +81,7 @@
                         <p>名称:{{form.name}}</p>
                         <p>执行次数:{{form.times}}</p>
                         <p>参数：
-                                <el-button size="small">详情</el-button>
+                            <el-button size="small" @click="dialogArgVisible = true">详情</el-button>
                         </p>
                     </div>
                     <el-form-item>
@@ -89,6 +89,13 @@
                         <el-button type="primary" @click="submitTask">添加到任务队列</el-button>
                     </el-form-item>
                </el-form>
+               <el-dialog title="参数列表" :visible.sync="dialogArgVisible">
+                    <div v-for="(args,index) in argForm" :key="index">
+                        <li v-for="(argKeys,index) in Object.keys(args)" :key="index">
+                            <span>{{argKeys}}</span>: {{args[argKeys]}}
+                        </li>
+                    </div>
+                </el-dialog>
                </div>
                
             </div>
@@ -106,6 +113,7 @@ export default {
     },
     data() {
       return {
+        dialogArgVisible: false,
         showUploadError: false,
         showUploadSuccess: false,
         settings:config.settings,

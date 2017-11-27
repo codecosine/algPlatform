@@ -130,13 +130,13 @@ var local1 = [
     {
         label: 'Sns',
         name: 'sns',
-        type: 'input',
+        type: 'inputArray',
         remark: 'sn子空间个数'
     },
     {
         label: 'fnMins',
         name: 'fnMins',
-        type: 'input',
+        type: 'inputArray',
         remark: 'sn子空间个数最小值，长度需要个sns一样'
     },
    

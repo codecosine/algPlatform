@@ -33,10 +33,23 @@
       
         </el-tab-pane>
         <el-tab-pane label="参数" name="second">
-          
+           <div v-for="(args,index) in argForm" :key="index">
+                <li v-for="(argKeys,index) in Object.keys(args)" :key="index">
+                    <span>{{argKeys}}</span>:=>> {{args[argKeys]}}
+                </li>
+            </div>
         </el-tab-pane>
         <el-tab-pane label="备注" name="third">
         </el-tab-pane>
+        <el-dialog title="结果" :visible.sync="dialogTableVisible">
+          <el-table :data="gridData">
+            <el-table-column property="id" label="id"></el-table-column>
+            <el-table-column property="A" label="A"></el-table-column>
+            <el-table-column property="AB" label="AB"></el-table-column>
+            <el-table-column property="B" label="AB"></el-table-column>
+            <el-table-column property="label" label="label"></el-table-column>
+          </el-table>
+        </el-dialog>
     </el-tabs>
   </div>
 </template>
@@ -47,6 +60,15 @@
       return {
         activeName: 'first'
       };
+    },
+    computed:{
+      argForm(){
+        return null
+      //  return task.argForm
+      },
+      gridData(){
+        return task.result.datas || []
+      }
     },
     methods: {
       handleClick(tab, event) {

@@ -13,6 +13,11 @@
                             style="margin-top:4px" size="small"
                             >
                 </el-input>
+                <el-input v-if="type==='inputArray'" v-model="value" 
+                            ref="inputArray" @change="updateValue"
+                            style="margin-top:4px" size="small"
+                            >
+                </el-input>
                 <el-select v-if="type==='select'" v-model="value" 
                             style="margin-top:4px" size="small"
                             @change="onchange" placeholder="请选择">
@@ -87,10 +92,30 @@ export default {
       }
   },
   methods:{
-      onchange(value){
-          this.$emit('formChange',value)
+    onchange(value){
+        this.$emit('formChange',value)
 
-      }
+    },
+        // 不是直接更新值，而是使用此方法来对输入值进行格式化和位数限制
+    updateValue(value) {
+        var formattedValue = value
+            // 删除两侧的空格符
+            .trim()
+            // 替换,
+            .replace(
+               /，/
+            ,',')
+        // 如果值尚不合规，则手动覆盖为合规的值
+        if (formattedValue !== value) {
+            this.$refs.inputArray.value = formattedValue
+        }
+        // 通过 input 事件带出数值
+        if (JSON.parse(formattedValue)){
+            this.$emit('formChange', JSON.parse(formattedValue))
+        }
+        //this.$emit('input', JSON.parse(formattedValue))
+    }
+       
   },
 
 }

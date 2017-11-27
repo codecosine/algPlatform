@@ -210,6 +210,19 @@ app.post('/solutionResult', function (req, res) {
                                  "label": 0
                              }
                          ],
+                        "AUC": 0.8473953488372094, //最终auc值
+                        "counts": [
+                             {
+                                 "count": "7-1[1, 2, 3, 4, 5, 6, 7]",
+                                 "pro": 0.12955465587044535
+                             },
+                             {
+                                 "count": "7-0[1, 2, 3, 4, 5, 6, 7]",
+                                 "pro": 0.8803986710963455
+                             }
+                         ],
+
+                         // 计算过程log
                          "subSpaces": [
                              {
                                  "subSpace": [
@@ -231,15 +244,6 @@ app.post('/solutionResult', function (req, res) {
                                  "chro": "[0.21000000000000002, 0.15000000000000002, 0.060000000000000005, 0.26, 0.77, 0.29000000000000004]"
                              }
                          ],
-                         "miss0Count": 0, //缺失0标签个数
-                         "testMiss": 0.2, //测试集缺失比例
-                         "subSpaceCreate": "SnRandomSubSpaceCreate(sn随机子空间创建){sns=[[I@207475a2, [I@6c90063f, [I@55c3222d, [I@456b12c3, [I@4631a6a9], fnMins=[1, 3, 6, 13, 15]}", //子空间创建方法
-                         "com0Count": 2400, //完整0标签个数
-                         "label1": 0.1, //1标签比例
-                         "parentChrosChoose": "RouletteParentChrosChoose{轮盘父母染色体选择算法}", //父母染色体选择算法
-                         "AUC": 0.8473953488372094, //最终auc值
-                         "evaluation": "Auc{evidenceSynthesis=TeaEvidenceSynthesis{DS证据合成}}", //评价算法
-                         "miss1Count": 0, //缺失1标签个数
                          "evidNameToIds": [
                              {
                                  "evidId": 1,
@@ -250,16 +254,21 @@ app.post('/solutionResult', function (req, res) {
                                  "evidName": "m2"
                              }
                          ],
-                         "counts": [
-                             {
-                                 "count": "7-1[1, 2, 3, 4, 5, 6, 7]",
-                                 "pro": 0.12955465587044535
-                             },
-                             {
-                                 "count": "7-0[1, 2, 3, 4, 5, 6, 7]",
-                                 "pro": 0.8803986710963455
-                             }
-                         ],
+
+                         "miss0Count": 0, //缺失0标签个数
+
+                         "testMiss": 0.2, //测试集缺失比例
+
+                         "subSpaceCreate": "SnRandomSubSpaceCreate(sn随机子空间创建){sns=[[I@207475a2, [I@6c90063f, [I@55c3222d, [I@456b12c3, [I@4631a6a9], fnMins=[1, 3, 6, 13, 15]}", //子空间创建方法
+                         "com0Count": 2400, //完整0标签个数
+                         "label1": 0.1, //1标签比例
+
+                         "parentChrosChoose": "RouletteParentChrosChoose{轮盘父母染色体选择算法}", //父母染色体选择算法
+                         "evaluation": "Auc{evidenceSynthesis=TeaEvidenceSynthesis{DS证据合成}}", //评价算法
+                         "miss1Count": 0, //缺失1标签个数
+
+                         
+                         
                          "com1Count": 402 //完整1标签个数
                      },
                      "testDataSetOutput": {//与trainDataSetOutput一样的结构}

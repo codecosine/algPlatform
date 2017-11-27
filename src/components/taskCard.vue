@@ -50,7 +50,7 @@
         <el-tab-pane label="备注" name="third">
         </el-tab-pane>
         <el-dialog title="结果" :visible.sync="dialogTableVisible">
-          <el-table :data="gridData">
+          <el-table :data="gridData" height="550">
             <el-table-column property="id" label="id"></el-table-column>
             <el-table-column property="A" label="A"></el-table-column>
             <el-table-column property="AB" label="AB"></el-table-column>
@@ -77,8 +77,9 @@
       gridData(){
         if(this.task.result){
           return this.task.result.datas
+        } else {
+          return []
         }
-        return []
       }
     },
     methods: {

@@ -15,7 +15,7 @@
                   </div>
                 </div>
                 <div class="box-result">
-                  <h3>计算结果<el-tag style="margin-left:10px" size="mini">下载</el-tag><el-tag type="success"style="margin-left:10px"  size="mini">在线</el-tag></h3>
+                  <h3>计算结果<el-tag style="margin-left:10px" size="mini">下载</el-tag><el-tag type="success"style="margin-left:10px" @click="dialogTableVisible= true" size="mini">在线</el-tag></h3>
                   <div>
                     <ul class="box-info-list">
                       <li><span><i class="el-icon-time"></i>启动时间:</span>{{ task.startTime || ''}}</li>
@@ -58,16 +58,16 @@
     props: ['task'],
     data() {
       return {
+        dialogTableVisible:false,
         activeName: 'first'
       };
     },
     computed:{
       argForm(){
-        return null
-      //  return task.argForm
+        return this.task.parameter || null
       },
       gridData(){
-        return task.result.datas || []
+        return this.task.result.datas || []
       }
     },
     methods: {
